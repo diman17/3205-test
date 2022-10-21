@@ -1,40 +1,78 @@
-import { Alert, Button, Card, Input, Modal, Typography } from "antd";
+import { Button, Card, Input, Modal, Typography } from "antd";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ErrorAlert from "../components/ErrorAlert.js";
+import { templateRegexp } from "../constants.js";
+import { fetchExchangeRates } from "../store/asyncActions.js";
+import { calculateRates } from "../utils.js";
 
 const { Title } = Typography;
 
 function Converter() {
-    const regexp = /^\d+ [a-zA-Z]{3} in [a-zA-Z]{3}$/;
-
     const [value, setValue] = useState("");
     const [status, setStatus] = useState("");
+    const [isValidCode, setIsValidCode] = useState(true);
 
-    const showModal = () => {
+    const dispatch = useDispatch();
+    const { isLoading, rates } = useSelector((state) => state.rates);
+
+    const showModal = (number, from, to, result) => {
         Modal.info({
-            content: <p>some messages...</p>,
+            content: (
+                <p style={{ fontSize: "1.2rem" }}>
+                    {number} {from} = {result.toFixed(2)} {to}
+                </p>
+            ),
         });
     };
 
     const submitRequest = () => {
-        if (!value) {
-            setStatus("error");
+        const isValidateRequest = validateRequest(value);
+
+        if (!isValidateRequest) {
             return;
         }
 
-        if (value && !regexp.test(value)) {
-            setStatus("error");
-            return;
-        }
+        const [number] = value.match(/^\d+/);
+        const from = value.match(/[a-zA-Z]{3}/)[0].toUpperCase();
+        const to = value.match(/[a-zA-Z]{3}$/)[0].toUpperCase();
 
-        onSubmitRequest();
         setStatus("");
-        showModal();
+
+        dispatch(fetchExchangeRates()).then(({ payload }) => {
+            const { rates } = payload;
+
+            if (!isLoading) {
+                const result = calculateRates(number, rates[from], rates[to]);
+
+                showModal(number, from, to, result);
+            }
+        });
     };
 
-    const onSubmitRequest = () => {
-        const [number] = value.match(/^\d+/);
-        const [from] = value.match(/[a-zA-Z]{3}/);
-        const [to] = value.match(/[a-zA-Z]{3}$/);
+    const validateRequest = (value) => {
+        if (!value) {
+            setIsValidCode(true);
+            setStatus("error");
+            return false;
+        }
+
+        if (value && !templateRegexp.test(value)) {
+            setIsValidCode(true);
+            setStatus("error");
+            return false;
+        }
+
+        const from = value.match(/[a-zA-Z]{3}/)[0].toUpperCase();
+        const to = value.match(/[a-zA-Z]{3}$/)[0].toUpperCase();
+
+        if (!rates.includes(from) || !rates.includes(to)) {
+            setIsValidCode(false);
+            setStatus("error");
+            return false;
+        }
+
+        return true;
     };
 
     const onChangeInput = (event) => {
@@ -42,14 +80,11 @@ function Converter() {
         setValue(event.target.value);
     };
 
-    const onCloseAlert = () => {
-        setStatus("");
-    };
-
     return (
         <Card style={{ margin: "0 auto", width: "50%" }}>
             <Title>Converter</Title>
             <p>Please, enter a request. For example, '15 usd in rub'</p>
+            <p>Available currencies : {[...rates].sort().join(", ")}</p>
             <Input
                 onChange={onChangeInput}
                 onPressEnter={submitRequest}
@@ -60,14 +95,7 @@ function Converter() {
                 autoFocus
             />
             {status ? (
-                <Alert
-                    onClose={onCloseAlert}
-                    style={{ marginBottom: "2rem" }}
-                    type="error"
-                    message="Please, follow the request template. For example, '15 usd in rub'"
-                    banner
-                    closable
-                />
+                <ErrorAlert setStatus={setStatus} isValidCode={isValidCode} />
             ) : (
                 ""
             )}

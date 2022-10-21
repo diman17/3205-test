@@ -1,19 +1,19 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Spin } from "antd";
 import { Content, Header } from "antd/lib/layout/layout";
-import { Link, Outlet } from "react-router-dom";
-
-const PAGES = [
-    {
-        key: "converter",
-        label: <Link to="/">Converter</Link>,
-    },
-    {
-        key: "exchange-rates",
-        label: <Link to="/exchange-rates">Exchange Rates</Link>,
-    },
-];
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
+import { PAGES } from "./constants";
+import { fetchAllCurrencies } from "./store/asyncActions";
 
 function App() {
+    const dispatch = useDispatch();
+    const { isLoading } = useSelector((state) => state.rates);
+
+    useEffect(() => {
+        dispatch(fetchAllCurrencies());
+    }, [dispatch]);
+
     return (
         <Layout style={{ minHeight: "100vh" }}>
             <Header>
@@ -24,8 +24,12 @@ function App() {
                     defaultSelectedKeys="converter"
                 />
             </Header>
-            <Content style={{ padding: "5rem" }}>
-                <Outlet />
+            <Content style={{ display: "flex", padding: "5rem" }}>
+                {isLoading ? (
+                    <Spin style={{ margin: "5rem auto" }} size="large" />
+                ) : (
+                    <Outlet />
+                )}
             </Content>
         </Layout>
     );
