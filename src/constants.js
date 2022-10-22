@@ -27,7 +27,7 @@ export const defaultCurrencies = {
     CHF: ["fr-CH", "fr-CH", "it-CH"],
     CNY: ["zh", "zh-HK", "zh-TW", "zh-CN"],
     JPY: ["ja"],
-    RUB: ["ru"],
+    RUB: ["ru", "ru-RU"],
     TRY: ["tr"],
     USD: ["en", "en-US"],
 };

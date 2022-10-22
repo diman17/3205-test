@@ -4,13 +4,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { PAGES } from "./constants";
-import { fetchAllCurrencies } from "./store/asyncActions";
+import { fetchAllCurrencies, fetchExchangeRates } from "./store/asyncActions";
 
 function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchAllCurrencies());
+        dispatch(fetchExchangeRates());
     }, [dispatch]);
 
     return (

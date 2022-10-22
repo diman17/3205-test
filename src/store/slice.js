@@ -23,7 +23,7 @@ const ratesSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(fetchExchangeRates.fulfilled, (state, action) => {
-            state.rates = action.payload;
+            state.rates = action.payload.rates;
             state.isLoading = false;
         });
     },
