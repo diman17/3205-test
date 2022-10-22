@@ -14,13 +14,13 @@ function Converter() {
     const [isValidCode, setIsValidCode] = useState(true);
 
     const dispatch = useDispatch();
-    const { isLoading, rates } = useSelector((state) => state.rates);
+    const { isLoading, currencies } = useSelector((state) => state.rates);
 
     const showModal = (number, from, to, result) => {
         Modal.info({
             content: (
                 <p style={{ fontSize: "1.2rem" }}>
-                    {number} {from} = {result.toFixed(2)} {to}
+                    {number} {from} = {result} {to}
                 </p>
             ),
         });
@@ -66,7 +66,7 @@ function Converter() {
         const from = value.match(/[a-zA-Z]{3}/)[0].toUpperCase();
         const to = value.match(/[a-zA-Z]{3}$/)[0].toUpperCase();
 
-        if (!rates.includes(from) || !rates.includes(to)) {
+        if (!currencies.includes(from) || !currencies.includes(to)) {
             setIsValidCode(false);
             setStatus("error");
             return false;
@@ -84,7 +84,7 @@ function Converter() {
         <Card style={{ margin: "0 auto", width: "50%" }}>
             <Title>Converter</Title>
             <p>Please, enter a request. For example, '15 usd in rub'</p>
-            <p>Available currencies : {[...rates].sort().join(", ")}</p>
+            <p>Available currencies : {[...currencies].sort().join(", ")}</p>
             <Input
                 onChange={onChangeInput}
                 onPressEnter={submitRequest}

@@ -3,6 +3,7 @@ import { fetchAllCurrencies, fetchExchangeRates } from "./asyncActions";
 
 const initialState = {
     isLoading: false,
+    currencies: [],
     rates: [],
 };
 
@@ -15,13 +16,14 @@ const ratesSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(fetchAllCurrencies.fulfilled, (state, action) => {
-            state.rates = action.payload;
+            state.currencies = action.payload;
             state.isLoading = false;
         });
         builder.addCase(fetchExchangeRates.pending, (state) => {
             state.isLoading = true;
         });
         builder.addCase(fetchExchangeRates.fulfilled, (state, action) => {
+            state.rates = action.payload;
             state.isLoading = false;
         });
     },

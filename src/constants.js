@@ -18,3 +18,16 @@ export const errorMessages = {
         "Please follow the request template. For example, '15 usd in rub'",
     code: "Please enter a valid 3-letter currency code",
 };
+
+export const defaultCurrencies = {
+    AUD: ["en-AU"],
+    BRL: ["pt-BR"],
+    BYN: ["be"],
+    CAD: ["en-CA", "en-CA"],
+    CHF: ["fr-CH", "fr-CH", "it-CH"],
+    CNY: ["zh", "zh-HK", "zh-TW", "zh-CN"],
+    JPY: ["ja"],
+    RUB: ["ru"],
+    TRY: ["tr"],
+    USD: ["en", "en-US"],
+};
