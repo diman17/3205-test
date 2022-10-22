@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 export const PAGES = [
     {
-        key: "converter",
+        key: "/",
         label: <Link to="/">Converter</Link>,
     },
     {
-        key: "exchange-rates",
+        key: "/exchange-rates",
         label: <Link to="/exchange-rates">Exchange Rates</Link>,
     },
 ];

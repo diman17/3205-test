@@ -2,12 +2,13 @@ import { Layout, Menu } from "antd";
 import { Content, Header } from "antd/lib/layout/layout";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { PAGES } from "./constants";
 import { fetchAllCurrencies, fetchExchangeRates } from "./store/asyncActions";
 
 function App() {
     const dispatch = useDispatch();
+    const { pathname } = useLocation();
 
     useEffect(() => {
         dispatch(fetchAllCurrencies());
@@ -21,7 +22,7 @@ function App() {
                     items={PAGES}
                     theme="dark"
                     mode="horizontal"
-                    defaultSelectedKeys="converter"
+                    defaultSelectedKeys={pathname}
                 />
             </Header>
             <Content style={{ display: "flex", padding: "5rem" }}>
