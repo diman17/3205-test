@@ -25,7 +25,7 @@ function App() {
                     defaultSelectedKeys={pathname}
                 />
             </Header>
-            <Content style={{ display: "flex", padding: "5rem" }}>
+            <Content style={{ padding: "5rem" }}>
                 <Outlet />
             </Content>
         </Layout>

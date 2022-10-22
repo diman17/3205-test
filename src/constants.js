@@ -11,7 +11,7 @@ export const PAGES = [
     },
 ];
 
-export const templateRegexp = /^\d+ [a-zA-Z]{3} in [a-zA-Z]{3}$/;
+export const templateRegexp = /^\d+ [a-zA-Z]{3} in [a-zA-Z]{3}$/i;
 
 export const errorMessages = {
     template:

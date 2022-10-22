@@ -9,7 +9,7 @@ const { Title } = Typography;
 
 function ExchangeRates() {
     const [currency, setCurrency] = useState(
-        getCurrencyByUserLang(navigator.language)
+        getCurrencyByUserLang(navigator.language || 'en-US')
     );
 
     const dispatch = useDispatch();
@@ -44,14 +44,16 @@ function ExchangeRates() {
                 />
             ) : (
                 <List
+                    style={{marginTop: '2rem'}}
+                    size="small"
                     itemLayout="horizontal"
                     dataSource={Object.keys(defaultCurrencies)}
                     renderItem={(item) => {
                         if (item === currency) {
-                            return "";
+                            return;
                         }
                         return (
-                            <List.Item>
+                            <List.Item style={{borderBottom: 'none'}}>
                                 <p>
                                     1 {item} = {calculateRates(1,rates[item],rates[currency])} {currency}
                                 </p>

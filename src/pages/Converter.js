@@ -72,52 +72,60 @@ function Converter() {
         return true;
     };
 
-    const onChangeInput = (event) => {
+    const onChangeInput = ({ target: { value } }) => {
         setStatus("");
-        setValue(event.target.value);
+        setValue(value);
     };
 
     const onCloseAlert = () => {
         setStatus("");
     };
 
-    if (isLoading) {
-        return <Spin style={{ margin: "5rem auto" }} size="large" />;
-    }
-
     return (
         <Card style={{ margin: "0 auto", width: "50%" }}>
             <Title>Converter</Title>
-            <p>Please, enter a request. For example, '15 usd in rub'</p>
-            <p>Available currencies : {[...currencies].sort().join(", ")}</p>
-            <Input
-                onChange={onChangeInput}
-                onPressEnter={submitRequest}
-                style={{ marginBottom: "2rem" }}
-                placeholder="15 usd in rub"
-                value={value}
-                status={status}
-                autoFocus
-            />
-            {status ? (
-                <Alert
-                    onClose={onCloseAlert}
-                    style={{ marginBottom: "2rem" }}
-                    type="error"
-                    message={
-                        isValidCode
-                            ? errorMessages.template
-                            : errorMessages.code
-                    }
-                    banner
-                    closable
+            {isLoading ? (
+                <Spin
+                    style={{ margin: "5rem calc(50% - 16px)" }}
+                    size="large"
                 />
             ) : (
-                ""
+                <>
+                    <p style={{ fontSize: "1.3rem" }}>
+                        Please, enter a request. For example, "15 usd in rub"
+                    </p>
+                    <p style={{ marginBottom: "2rem" }}>
+                        Available currencies: {[...currencies].sort().join(", ")}
+                    </p>
+                    <Input
+                        onChange={onChangeInput}
+                        onPressEnter={submitRequest}
+                        style={{ marginBottom: "1rem", width: "50%" }}
+                        placeholder="15 usd in rub"
+                        value={value}
+                        status={status}
+                        autoFocus
+                    />
+                    <Button onClick={submitRequest} type="primary">
+                        Convert
+                    </Button>
+                    {status ? (
+                        <Alert
+                            onClose={onCloseAlert}
+                            type="error"
+                            message={
+                                isValidCode
+                                    ? errorMessages.template
+                                    : errorMessages.code
+                            }
+                            banner
+                            closable
+                        />
+                    ) : (
+                        ""
+                    )}
+                </>
             )}
-            <Button onClick={submitRequest} type="primary">
-                Convert
-            </Button>
         </Card>
     );
 }
