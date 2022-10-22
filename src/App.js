@@ -1,14 +1,13 @@
-import { Layout, Menu, Spin } from "antd";
+import { Layout, Menu } from "antd";
 import { Content, Header } from "antd/lib/layout/layout";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { PAGES } from "./constants";
 import { fetchAllCurrencies } from "./store/asyncActions";
 
 function App() {
     const dispatch = useDispatch();
-    const { isLoading } = useSelector((state) => state.rates);
 
     useEffect(() => {
         dispatch(fetchAllCurrencies());
@@ -25,11 +24,7 @@ function App() {
                 />
             </Header>
             <Content style={{ display: "flex", padding: "5rem" }}>
-                {isLoading ? (
-                    <Spin style={{ margin: "5rem auto" }} size="large" />
-                ) : (
-                    <Outlet />
-                )}
+                <Outlet />
             </Content>
         </Layout>
     );

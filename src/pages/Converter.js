@@ -1,8 +1,7 @@
-import { Button, Card, Input, Modal, Typography } from "antd";
+import { Alert, Button, Card, Input, Modal, Spin, Typography } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorAlert from "../components/ErrorAlert.js";
-import { templateRegexp } from "../constants.js";
+import { errorMessages, templateRegexp } from "../constants.js";
 import { fetchExchangeRates } from "../store/asyncActions.js";
 import { calculateRates } from "../utils.js";
 
@@ -39,9 +38,7 @@ function Converter() {
 
         setStatus("");
 
-        dispatch(fetchExchangeRates()).then(({ payload }) => {
-            const { rates } = payload;
-
+        dispatch(fetchExchangeRates()).then(({ payload: { rates } }) => {
             if (!isLoading) {
                 const result = calculateRates(number, rates[from], rates[to]);
 
@@ -80,6 +77,14 @@ function Converter() {
         setValue(event.target.value);
     };
 
+    const onCloseAlert = () => {
+        setStatus("");
+    };
+
+    if (isLoading) {
+        return <Spin style={{ margin: "5rem auto" }} size="large" />;
+    }
+
     return (
         <Card style={{ margin: "0 auto", width: "50%" }}>
             <Title>Converter</Title>
@@ -95,7 +100,18 @@ function Converter() {
                 autoFocus
             />
             {status ? (
-                <ErrorAlert setStatus={setStatus} isValidCode={isValidCode} />
+                <Alert
+                    onClose={onCloseAlert}
+                    style={{ marginBottom: "2rem" }}
+                    type="error"
+                    message={
+                        isValidCode
+                            ? errorMessages.template
+                            : errorMessages.code
+                    }
+                    banner
+                    closable
+                />
             ) : (
                 ""
             )}
