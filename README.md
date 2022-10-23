@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+<a name="readme-top"></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Xe Currency Converter
 
-## Available Scripts
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
+  </ol>
+</details>
 
-In the project directory, you can run:
+## About the project
 
-### `npm start`
+An application consists of two pages:
+- Converter - contains a text field in which you can enter text in the form "15 usd in rub", press enter and get the result
+- Exchange Rates - contains "fresh" exchange rates relative to the base currency. For example, if the base currency is the ruble, then the user sees that 1 USD = 63.49 RUB, and 1 BYN = 24.59 RUB
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Default value of the base currency is determined by the browser language
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The demo can be viewed at the link https://xe-currency-converter.netlify.app/  
 
-### `npm test`
+Converter page:  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![converter](https://user-images.githubusercontent.com/42317715/197381664-e187afe5-5e34-48fe-a0b0-4cdebe7b9351.gif)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Exchange Rates page:  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![exchange-rates](https://user-images.githubusercontent.com/42317715/197381667-d1de7165-bf1c-4f49-b98b-0e6a3e7dbce0.gif)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Built with
 
-### `npm run eject`
+- React
+- React Router
+- Redux Toolkit
+- Ant Design
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Getting started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Prepare
 
-## Learn More
+- Install [Node.js](https://nodejs.org/en/)
+- Fork this repository: https://github.com/diman17/xe-currency-converter/
+- Clone your newly created repo: `https://github.com/<%your_github_username%>/xe-currency-converter/`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Go to folder `xe-currency-converter`
+- To install all dependencies use `npm install`
 
-### Code Splitting
+### Launch
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Run `npm start` in the command line for development mode
+- Run `npm run build` in the command line for production mode
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
