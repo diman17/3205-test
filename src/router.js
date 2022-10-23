@@ -1,8 +1,8 @@
 import App from "./App";
 import { createBrowserRouter } from "react-router-dom";
-import Converter from "./pages/Converter";
-import ExchangeRates from "./pages/ExchangeRates";
-import Error from "./pages/Error";
+import Converter from "./pages/converter/Converter";
+import ExchangeRates from "./pages/exchangeRates/ExchangeRates";
+import Error from "./pages/error/Error";
 
 export const router = createBrowserRouter([
     {

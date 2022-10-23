@@ -1,9 +1,10 @@
 import { Alert, Button, Card, Input, Modal, Spin, Typography } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { errorMessages, templateRegexp } from "../constants.js";
-import { fetchExchangeRates } from "../store/asyncActions.js";
-import { calculateRates } from "../utils.js";
+import { errorMessages, templateRegexp } from "../../constants.js";
+import { fetchExchangeRates } from "../../store/asyncActions.js";
+import { calculateRates } from "../../utils.js";
+import styles from './converter.module.css';
 
 const { Title } = Typography;
 
@@ -82,7 +83,7 @@ function Converter() {
     };
 
     return (
-        <Card style={{ margin: "0 auto", width: "50%" }}>
+        <Card className={styles.card}>
             <Title>Converter</Title>
             {isLoading ? (
                 <Spin

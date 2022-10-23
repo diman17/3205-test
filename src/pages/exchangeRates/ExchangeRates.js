@@ -1,9 +1,10 @@
 import { Card, List, Radio, Spin, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { defaultCurrencies } from "../constants";
-import { fetchExchangeRates } from "../store/asyncActions";
-import { calculateRates, getCurrencyByUserLang } from "../utils";
+import { defaultCurrencies } from "../../constants";
+import { fetchExchangeRates } from "../../store/asyncActions";
+import { calculateRates, getCurrencyByUserLang } from "../../utils";
+import styles from './exchangeRates.module.css';
 
 const { Title } = Typography;
 
@@ -24,7 +25,7 @@ function ExchangeRates() {
     };
 
     return (
-        <Card style={{ margin: "0 auto", width: "50%" }}>
+        <Card className={styles.card}>
             <Title>Exchange Rates</Title>
             <Radio.Group onChange={onRadioChange} defaultValue={currency}>
                 {Object.keys(defaultCurrencies).map((key) => (

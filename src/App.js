@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 import { PAGES } from "./constants";
 import { fetchAllCurrencies, fetchExchangeRates } from "./store/asyncActions";
+import styles from './styles/app.module.css'
 
 function App() {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
                     defaultSelectedKeys={pathname}
                 />
             </Header>
-            <Content style={{ padding: "5rem" }}>
+            <Content className={styles.content}>
                 <Outlet />
             </Content>
         </Layout>
