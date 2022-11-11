@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const BASE_URL = "https://cdn.cur.su/api/cbr.json";
+const BASE_URL = "https://www.cbr-xml-daily.ru/latest.js";
 
 export const fetchRates = async () => {
     const response = await axios.get(BASE_URL);
-    return response.data;
+    const data = response.data;
+    data.rates.RUB = 1;
+    return data;
 };
